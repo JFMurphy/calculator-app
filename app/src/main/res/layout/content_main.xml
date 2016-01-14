@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_main">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/output_display"
+        android:id="@+id/outputDisplay" />
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        ></GridLayout>
+
+
+
+    <!--<Button
+        android:id="@+id/buttonOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/outputDisplay"
+        android:layout_marginTop="@dimen/top_button_margin"
+        android:text="1"
+        android:onClick="addNumber"/>
+
+    <Button
+        android:id="@+id/buttonTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/outputDisplay"
+        android:layout_marginTop="@dimen/top_button_margin"
+        android:layout_toRightOf="@+id/buttonOne"
+        android:text="2"
+        android:onClick="addNumber"/>
+
+    <Button
+        android:id="@+id/buttonThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/outputDisplay"
+        android:layout_marginTop="@dimen/top_button_margin"
+        android:layout_toRightOf="@+id/buttonTwo"
+        android:text="3"
+        android:onClick="addNumber"/>
+
+    <Button
+        android:id="@+id/buttonFour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonOne"
+        android:text="4"
+        android:onClick="addNumber"/>
+
+    <Button
+        android:id="@+id/buttonFive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonTwo"
+        android:layout_toRightOf="@+id/buttonFour"
+        android:text="5"
+        android:onClick="addNumber"/>
+
+    <Button
+        android:id="@+id/buttonSix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonThree"
+        android:layout_toRightOf="@+id/buttonFive"
+        android:text="6"
+        android:onClick="addNumber"/>
+
+    <Button
+        android:id="@+id/buttonSeven"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonFour"
+        android:text="7"
+        android:onClick="addNumber"/>
+
+    <Button
+        android:id="@+id/buttonEight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonFive"
+        android:layout_toRightOf="@+id/buttonSeven"
+        android:text="8"
+        android:onClick="addNumber"/>
+
+    <Button
+        android:id="@+id/buttonNine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonSix"
+        android:layout_toRightOf="@+id/buttonEight"
+        android:text="9"
+        android:onClick="addNumber"/>
+
+    <Button
+        android:id="@+id/buttonPlus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/outputDisplay"
+        android:layout_toRightOf="@+id/buttonThree"
+        android:layout_marginTop="@dimen/top_button_margin"
+        android:text="+" />-->
+
+
+
+</RelativeLayout>
