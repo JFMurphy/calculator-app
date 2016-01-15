@@ -9,4 +9,122 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="calculator.johnmurphy.com.calculator.CalculatorActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/output_display"
+        android:id="@+id/outputDisplay" />
+
+    <GridLayout
+        android:layout_below="@id/outputDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:columnCount="4"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonClear"
+            android:onClick=""
+            android:text="AC" />
+
+        <Button
+            android:id="@+id/buttonPercent"
+            android:onClick=""
+            android:text="%" />
+
+        <Button
+            android:id="@+id/buttonDivide"
+            android:onClick=""
+            android:text="/" />
+
+        <Button
+            android:id="@+id/buttonDelete"
+            android:onClick=""
+            android:text="DEL" />
+
+        <Button
+            android:id="@+id/buttonSeven"
+            android:onClick="addNumber"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/buttonEight"
+            android:onClick="addNumber"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/buttonNine"
+            android:onClick="addNumber"
+            android:text="9" />
+
+        <Button
+            android:id="@+id/buttonMultiply"
+            android:onClick=""
+            android:text="*" />
+
+        <Button
+            android:id="@+id/buttonFour"
+            android:onClick="addNumber"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/buttonFive"
+            android:onClick="addNumber"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/buttonSix"
+            android:onClick="addNumber"
+            android:text="6" />
+
+        <Button
+            android:id="@+id/buttonSubtract"
+            android:onClick=""
+            android:text="-" />
+
+        <Button
+            android:id="@+id/buttonOne"
+            android:onClick="addNumber"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/buttonTwo"
+            android:onClick="addNumber"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/buttonThree"
+            android:onClick="addNumber"
+            android:text="3" />
+
+        <Button
+            android:id="@+id/buttonAdd"
+            android:onClick=""
+            android:text="+" />
+
+        <Button
+            android:id="@+id/buttonBrackets"
+            android:onClick=""
+            android:text="()" />
+
+        <Button
+            android:id="@+id/buttonZero"
+            android:onClick="addNumber"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/buttonPoint"
+            android:onClick=""
+            android:text="." />
+
+        <Button
+            android:id="@+id/buttonEquals"
+            android:onClick=""
+            android:text="=" />
+
+    </GridLayout>
+
 </RelativeLayout>
