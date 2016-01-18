@@ -53,4 +53,8 @@ public class CalculatorActivity extends AppCompatActivity {
             display.setText(temp.substring(0, displayTextLen - 1));
         }
     }
+
+    public void sendEquation(View view) {
+        // TODO Send display text to be solved.
+    }
 }
