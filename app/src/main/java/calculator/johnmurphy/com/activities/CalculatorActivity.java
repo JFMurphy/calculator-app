@@ -7,10 +7,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import calculator.johnmurphy.com.calculator.R;
+import calculator.johnmurphy.com.implementation.Calculator;
+import calculator.johnmurphy.com.implementation.TypeCheck;
 
 public class CalculatorActivity extends AppCompatActivity {
 
-    private Boolean bracketOpen = false;
+    private boolean bracketOpen = false;
+    private boolean newNumber = false;
+    private String numberValue = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +23,21 @@ public class CalculatorActivity extends AppCompatActivity {
     }
 
     public void addElement(View view) {
+        TypeCheck tc = new TypeCheck();
         EditText input = (EditText) findViewById(R.id.outputDisplay);
         Button button = (Button) view;
 
-        input.append(button.getText());
+        String buttonText = button.getText().toString();
+
+        if (Character.isDigit(buttonText.charAt(0))) {
+            if (numberValue.isEmpty())
+                newNumber = true;
+            numberValue += buttonText;
+        }
+
+        if (tc.isOperator(buttonText.charAt(0))) {
+
+        }
     }
 
     public void clearDisplay(View view) {

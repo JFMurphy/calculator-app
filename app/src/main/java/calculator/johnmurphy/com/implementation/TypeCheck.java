@@ -1,3 +1,4 @@
+package calculator.johnmurphy.com.implementation;
 
 public class TypeCheck {
 	public boolean isOperator(char token) {

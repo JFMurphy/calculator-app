@@ -1,3 +1,4 @@
+package calculator.johnmurphy.com.implementation;
 
 public class StringHandler extends TypeCheck {
 
@@ -16,7 +17,7 @@ public class StringHandler extends TypeCheck {
 		String value = "";
 
 		str = str.replaceAll(" ", "");
-		str = removeDuplicateOperaters(str);
+		str = removeDuplicateOperators(str);
 
 		for (int i = 0; i < str.length(); i++) {
 			char temp = str.charAt(i);
@@ -47,7 +48,7 @@ public class StringHandler extends TypeCheck {
 	 *            String to be processed.
 	 * @return Modified string with no duplicates
 	 */
-	public String removeDuplicateOperaters(String str) {
+	public String removeDuplicateOperators(String str) {
 		String modifiedStr = str;
 
 		for (int i = 0; i < modifiedStr.length() - 1; i++) {

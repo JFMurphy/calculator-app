@@ -1,3 +1,5 @@
+package calculator.johnmurphy.com.implementation;
+
 public class StackToken extends TypeCheck {
 
 	private String type;
