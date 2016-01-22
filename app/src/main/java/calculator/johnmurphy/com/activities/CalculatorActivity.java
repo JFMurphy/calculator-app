@@ -1,10 +1,12 @@
-package calculator.johnmurphy.com.calculator;
+package calculator.johnmurphy.com.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import calculator.johnmurphy.com.calculator.R;
 
 public class CalculatorActivity extends AppCompatActivity {
 

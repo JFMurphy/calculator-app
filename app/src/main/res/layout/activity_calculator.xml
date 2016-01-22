@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="calculator.johnmurphy.com.calculator.CalculatorActivity">
+    tools:context="calculator.johnmurphy.com.activities.CalculatorActivity">
 
     <EditText
         android:layout_width="wrap_content"
