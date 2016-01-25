@@ -3,14 +3,15 @@ package calculator.johnmurphy.com.implementation;
 public class TypeCheck {
 	public boolean isOperator(char token) {
 		switch (token) {
-		case '+':
-		case '-':
-		case '*':
-		case '/':
-			return true;
+			case '+':
+			case '-':
+			case '*':
+			case '/':
+			case '%':
+				return true;
 
-		default:
-			return false;
+			default:
+				return false;
 		}
 	}
 
@@ -26,16 +27,17 @@ public class TypeCheck {
 	
 	public boolean isNonNumeric(char c) {
 		switch (c) {
-		case '+':
-		case '-':
-		case '*':
-		case '/':
-		case '(':
-		case ')':
-			return true;
+			case '+':
+			case '-':
+			case '*':
+			case '/':
+			case '%':
+			case '(':
+			case ')':
+				return true;
 
-		default:
-			return false;
+			default:
+				return false;
 		}
 	}
 }
