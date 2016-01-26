@@ -21,9 +21,11 @@
         <activity android:name="calculator.johnmurphy.com.activities.CalculatorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="calculator.johnmurphy.com.activities.LayoutTest"></activity>
     </application>
 
 </manifest>
