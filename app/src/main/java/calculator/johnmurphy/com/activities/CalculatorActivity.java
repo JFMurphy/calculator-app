@@ -41,14 +41,14 @@ public class CalculatorActivity extends AppCompatActivity {
             display.append(button.getText());
         } else if (buttonText.charAt(0) == '.') {
             if (numberValue.contains("."))
-                System.out.println("Error");
+                System.out.println("Error!");
             else {
                 display.append(buttonText);
                 numberValue += buttonText;
             }
         } else if (tc.isOperator(buttonText.charAt(0)) && display.length() > 0) {
             if (tc.isOperator(display.getText().charAt(display.length()-1)))
-                System.out.println("There's an operator here");
+                System.out.println("There's an operator here!");
             else {
                 display.append(buttonText);
                 numberValue = "";
