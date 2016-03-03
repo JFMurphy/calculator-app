@@ -8,6 +8,8 @@ public class TypeCheck {
 			case '*':
 			case '/':
 			case '%':
+			case '÷':
+			case '×':
 				return true;
 
 			default:
@@ -34,6 +36,8 @@ public class TypeCheck {
 			case '%':
 			case '(':
 			case ')':
+			case '÷':
+			case '×':
 				return true;
 
 			default:
