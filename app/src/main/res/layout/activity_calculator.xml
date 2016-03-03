@@ -21,10 +21,10 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:layout_weight="1"
-            android:ellipsize="start"
-            android:gravity="end"
-            android:inputType="number"
+            android:cursorVisible="true"
+            android:inputType="none"
             android:textIsSelectable="true"
+            android:gravity="end"
             android:textSize="@dimen/button_text_size"/>
     </LinearLayout>
 
@@ -42,7 +42,7 @@
             android:layout_weight="2"
             android:text="AC"
             android:textSize="@dimen/button_text_size"
-            android:onClick="clearDisplay"
+            android:onClick="buttonPress"
             />
 
         <Button
@@ -53,7 +53,7 @@
             android:layout_weight="1"
             android:text="Del"
             android:textSize="@dimen/button_text_size"
-            android:onClick="deleteElement"
+            android:onClick="buttonPress"
             />
 
         <Button
@@ -64,7 +64,7 @@
             android:layout_weight="1"
             android:text="÷"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
     </TableRow>
 
@@ -82,7 +82,7 @@
             android:layout_weight="1"
             android:text="7"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
 
         <Button
@@ -93,7 +93,7 @@
             android:layout_weight="1"
             android:text="8"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
 
         <Button
@@ -104,7 +104,7 @@
             android:layout_weight="1"
             android:text="9"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
 
         <Button
@@ -115,7 +115,7 @@
             android:layout_weight="1"
             android:text="×"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
     </TableRow>
 
@@ -132,7 +132,7 @@
             android:layout_weight="1"
             android:text="4"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
 
         <Button
@@ -143,7 +143,7 @@
             android:layout_weight="1"
             android:text="5"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
 
         <Button
@@ -154,7 +154,7 @@
             android:layout_weight="1"
             android:text="6"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
 
         <Button
@@ -165,7 +165,7 @@
             android:layout_weight="1"
             android:text="-"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
     </TableRow>
 
@@ -182,7 +182,7 @@
             android:layout_weight="1"
             android:text="1"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
 
         <Button
@@ -193,7 +193,7 @@
             android:layout_weight="1"
             android:text="2"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
 
         <Button
@@ -204,7 +204,7 @@
             android:layout_weight="1"
             android:text="3"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
 
         <Button
@@ -215,7 +215,7 @@
             android:layout_weight="1"
             android:text="+"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
     </TableRow>
 
@@ -232,7 +232,7 @@
             android:layout_weight="1"
             android:text="( )"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addBrackets"
+            android:onClick="buttonPress"
             />
 
         <Button
@@ -243,7 +243,7 @@
             android:layout_weight="1"
             android:text="0"
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
 
         <Button
@@ -254,7 +254,7 @@
             android:layout_weight="1"
             android:text="."
             android:textSize="@dimen/button_text_size"
-            android:onClick="addElement"
+            android:onClick="buttonPress"
             />
 
         <Button
@@ -265,7 +265,7 @@
             android:layout_weight="1"
             android:text="="
             android:textSize="@dimen/button_text_size"
-            android:onClick="sendEquation"
+            android:onClick="buttonPress"
             />
     </TableRow>
 </TableLayout>

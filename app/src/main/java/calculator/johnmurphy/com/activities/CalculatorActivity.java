@@ -13,6 +13,9 @@ import calculator.johnmurphy.com.implementation.TypeCheck;
 public class CalculatorActivity extends AppCompatActivity {
 
     private boolean bracketOpen = false;
+    /* Stores the value of a whole number.
+     Will reset once an operator is added, equation is calculated or display is cleared.
+      */
     private String numberValue = "";
 
     @Override
@@ -21,7 +24,7 @@ public class CalculatorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calculator);
     }
 
-    public void addElement(View view) {
+    public void buttonPress(View view) {
         TypeCheck tc = new TypeCheck();
         EditText display = (EditText) findViewById(R.id.outputDisplay);
         Button button = (Button) view;
@@ -57,71 +60,55 @@ public class CalculatorActivity extends AppCompatActivity {
 
             /* Performs the actions for adding brackets to the calculation. */
             case R.id.buttonBrackets:
-                break;
-            case R.id.buttonMultiply:
-                if (display.length() > 0) {
-                    //TODO Check for any operators or brackets
-                    if (display.getText().charAt(display.length()-1) == '×') {
-                        System.out.println("There already is an operator here!");
-                    } else {
-                        display.append("×");
-                        numberValue = "";
-                    }
+                // TODO implement bracket adding functionality
+                if (!bracketOpen) {
+                    bracketOpen = true;
+                    display.append("(");
+                } else {
+                    display.append(")");
+                    bracketOpen = false;
                 }
-
                 break;
+
+            /* Adding mathematical operators */
+            case R.id.buttonMultiply:
             case R.id.buttonDivide:
+            case R.id.buttonAdd:
+            case R.id.buttonSubtract:
                 if (canAddOperator(display, tc)) {
                     display.append(buttonText);
                     numberValue = "";
                 }
                 break;
 
+            /* Actions for removing parts of the equation and clearing the display */
+            case R.id.buttonClear:
+                display.setText("");
+                numberValue = "";
+                bracketOpen = false;
+                break;
+            case R.id.buttonDelete:
+                /**
+                 * TODO
+                 * Implement functionality to delete characters from the current position of the cursor.
+                 */
+                break;
+
+            /* Calculating the equation. */
+            case R.id.buttonEquals:
+                // TODO make it calculate.
         }
 
-        /**
-         * If numberValue is empty start new number.
-         * Add current number to display.
-         * If button is a point '.' check if there is already a point in the current number, if not
-         * add one.
-         * If button is an operator check if there is an operator before it,
-         * if not add the operator.
-
-        if (Character.isDigit(buttonText.charAt(0))) {
-            numberValue += buttonText;
-            display.append(button.getText());
-        } else if (buttonText.charAt(0) == '.') {
-            if (numberValue.contains("."))
-                System.out.println("Error!");
-            else {
-                display.append(buttonText);
-                numberValue += buttonText;
-            }
-        } else if (tc.isOperator(buttonText.charAt(0)) && display.length() > 0) {
-            if (tc.isOperator(display.getText().charAt(display.length()-1)))
-                System.out.println("There's an operator here!");
-            else {
-                display.append(buttonText);
-                numberValue = "";
-            }
-        }*/
     }
 
     private Boolean canAddOperator(EditText display, TypeCheck typeCheck) {
-        // Checking the end of the display for an existing operator.
+        // Checking the end of the display for an existing operator and return true if found.
         if (typeCheck.isOperator(display.getText().charAt(display.length()-1))) {
             System.out.println("There is already an operator here!");
             return false;
         } else {
             return true;
         }
-    }
-
-    public void clearDisplay(View view) {
-        EditText display = (EditText) findViewById(R.id.outputDisplay);
-
-        display.setText("");
-        bracketOpen = false;
     }
 
     public void addBrackets(View view) {
