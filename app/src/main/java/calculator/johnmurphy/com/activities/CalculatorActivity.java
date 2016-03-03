@@ -28,6 +28,57 @@ public class CalculatorActivity extends AppCompatActivity {
 
         String buttonText = button.getText().toString();
 
+        switch(button.getId()) {
+
+            /* Adds numbers to the calculation. */
+            case R.id.buttonOne:
+            case R.id.buttonTwo:
+            case R.id.buttonThree:
+            case R.id.buttonFour:
+            case R.id.buttonFive:
+            case R.id.buttonSix:
+            case R.id.buttonSeven:
+            case R.id.buttonEight:
+            case R.id.buttonNine:
+            case R.id.buttonZero:
+                numberValue += buttonText;
+                display.append(buttonText);
+                break;
+
+            /* Checks for a decimal point and adds one if there isn't one in the current number. */
+            case R.id.buttonPoint:
+                if (numberValue.contains(".")) {
+                    System.out.println("Decimal point already exists.");
+                } else {
+                    display.append(buttonText);
+                    numberValue += buttonText;
+                }
+                break;
+
+            /* Performs the actions for adding brackets to the calculation. */
+            case R.id.buttonBrackets:
+                break;
+            case R.id.buttonMultiply:
+                if (display.length() > 0) {
+                    //TODO Check for any operators or brackets
+                    if (display.getText().charAt(display.length()-1) == '×') {
+                        System.out.println("There already is an operator here!");
+                    } else {
+                        display.append("×");
+                        numberValue = "";
+                    }
+                }
+
+                break;
+            case R.id.buttonDivide:
+                if (canAddOperator(display, tc)) {
+                    display.append(buttonText);
+                    numberValue = "";
+                }
+                break;
+
+        }
+
         /**
          * If numberValue is empty start new number.
          * Add current number to display.
@@ -35,7 +86,7 @@ public class CalculatorActivity extends AppCompatActivity {
          * add one.
          * If button is an operator check if there is an operator before it,
          * if not add the operator.
-         */
+
         if (Character.isDigit(buttonText.charAt(0))) {
             numberValue += buttonText;
             display.append(button.getText());
@@ -53,6 +104,16 @@ public class CalculatorActivity extends AppCompatActivity {
                 display.append(buttonText);
                 numberValue = "";
             }
+        }*/
+    }
+
+    private Boolean canAddOperator(EditText display, TypeCheck typeCheck) {
+        // Checking the end of the display for an existing operator.
+        if (typeCheck.isOperator(display.getText().charAt(display.length()-1))) {
+            System.out.println("There is already an operator here!");
+            return false;
+        } else {
+            return true;
         }
     }
 
