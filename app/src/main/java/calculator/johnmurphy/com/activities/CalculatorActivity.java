@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import calculator.johnmurphy.com.calculator.R;
 import calculator.johnmurphy.com.implementation.Calculator;
@@ -13,10 +14,7 @@ import calculator.johnmurphy.com.implementation.TypeCheck;
 public class CalculatorActivity extends AppCompatActivity {
 
     private boolean bracketOpen = false;
-    /* Stores the value of a whole number.
-     Will reset once an operator is added, equation is calculated or display is cleared.
-      */
-    private String numberValue = "";
+    private String currentNumber = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,77 +25,116 @@ public class CalculatorActivity extends AppCompatActivity {
     public void buttonPress(View view) {
         TypeCheck tc = new TypeCheck();
         EditText display = (EditText) findViewById(R.id.outputDisplay);
-        Button button = (Button) view;
+        Button button;
+        ImageButton imgButton;
+        String buttonText;
 
-        String buttonText = button.getText().toString();
+        /* Check if this view is an ImageButton and cast it.
+           If not cast as Button.
+         */
+        if (view instanceof ImageButton) {
+            imgButton = (ImageButton) view;
 
-        switch(button.getId()) {
+            switch (imgButton.getId()) {
+                case R.id.buttonDelete:
+                    /**
+                     * TODO
+                     * Implement functionality to delete characters from the current position of the cursor.
+                     */
+                    String currentDisplayContents = display.getText().toString();
+                    String newDisplayContents = "";
+
+                    if (display.length() != 0) {
+                        //If multiple characters are selected.
+                        if (display.getSelectionEnd() > display.getSelectionStart() ) {
+                            newDisplayContents = currentDisplayContents.substring(0, display.getSelectionStart());
+                            newDisplayContents += currentDisplayContents.substring(display.getSelectionEnd());
+
+                            display.setText(newDisplayContents);
+                        } else {
+                            // There is no selection but there is a cursor.
+                            int cursorPosition = display.getSelectionStart();
+                            newDisplayContents = currentDisplayContents.substring(0, cursorPosition)
+                                    + currentDisplayContents.substring(cursorPosition);
+
+                            display.setText(newDisplayContents);
+                        }
+                    }
+                    break;
+            }
+        }
+        else {
+            button = (Button) view;
+            buttonText = button.getText().toString();
+
+            switch(button.getId()) {
 
             /* Adds numbers to the calculation. */
-            case R.id.buttonOne:
-            case R.id.buttonTwo:
-            case R.id.buttonThree:
-            case R.id.buttonFour:
-            case R.id.buttonFive:
-            case R.id.buttonSix:
-            case R.id.buttonSeven:
-            case R.id.buttonEight:
-            case R.id.buttonNine:
-            case R.id.buttonZero:
-                numberValue += buttonText;
-                display.append(buttonText);
-                break;
+                // TODO Improve number adding method so numbers can be added at any position.
+                case R.id.buttonOne:
+                case R.id.buttonTwo:
+                case R.id.buttonThree:
+                case R.id.buttonFour:
+                case R.id.buttonFive:
+                case R.id.buttonSix:
+                case R.id.buttonSeven:
+                case R.id.buttonEight:
+                case R.id.buttonNine:
+                case R.id.buttonZero:
+                    currentNumber += buttonText;
+                    display.append(buttonText);
+                    break;
 
             /* Checks for a decimal point and adds one if there isn't one in the current number. */
-            case R.id.buttonPoint:
-                if (numberValue.contains(".")) {
-                    System.out.println("Decimal point already exists.");
-                } else {
-                    display.append(buttonText);
-                    numberValue += buttonText;
-                }
-                break;
+                case R.id.buttonPoint:
+                    if (currentNumber.contains(".")) {
+                        System.out.println("Decimal point already exists.");
+                    } else {
+                        display.append(buttonText);
+                        currentNumber += buttonText;
+                    }
+                    break;
 
             /* Performs the actions for adding brackets to the calculation. */
-            case R.id.buttonBrackets:
-                // TODO implement bracket adding functionality
-                if (!bracketOpen) {
-                    bracketOpen = true;
-                    display.append("(");
-                } else {
-                    display.append(")");
-                    bracketOpen = false;
-                }
-                break;
+                case R.id.buttonBrackets:
+                    // TODO improve bracket adding functionality
+                    if (!bracketOpen) {
+                        bracketOpen = true;
+                        display.append("(");
+                    } else {
+                        display.append(")");
+                        bracketOpen = false;
+                    }
+                    break;
 
             /* Adding mathematical operators */
-            case R.id.buttonMultiply:
-            case R.id.buttonDivide:
-            case R.id.buttonAdd:
-            case R.id.buttonSubtract:
-                if (canAddOperator(display, tc)) {
-                    display.append(buttonText);
-                    numberValue = "";
-                }
-                break;
+                case R.id.buttonMultiply:
+                case R.id.buttonDivide:
+                case R.id.buttonAdd:
+                case R.id.buttonSubtract:
+                    if (canAddOperator(display, tc)) {
+                        display.append(buttonText);
+                        currentNumber = "";
+                    }
+                    break;
 
-            /* Actions for removing parts of the equation and clearing the display */
-            case R.id.buttonClear:
-                display.setText("");
-                numberValue = "";
-                bracketOpen = false;
-                break;
-            case R.id.buttonDelete:
-                /**
-                 * TODO
-                 * Implement functionality to delete characters from the current position of the cursor.
-                 */
-                break;
+            /* Actions for clearing the display and deleting characters */
+                case R.id.buttonClear:
+                    display.setText("");
+                    currentNumber = "";
+                    bracketOpen = false;
+                    break;
 
             /* Calculating the equation. */
-            case R.id.buttonEquals:
-                // TODO make it calculate.
+                case R.id.buttonEquals:
+                    // TODO make it calculate.
+            }
         }
+        //Button button = (Button) view;
+
+        //String buttonText = button.getText().toString();
+
+
 
     }
 
