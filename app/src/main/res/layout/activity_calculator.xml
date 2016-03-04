@@ -22,10 +22,10 @@
             android:layout_gravity="end"
             android:layout_weight="1"
             android:cursorVisible="true"
-            android:inputType="none"
+            android:inputType="text"
             android:textIsSelectable="true"
             android:gravity="end"
-            android:textSize="@dimen/button_text_size"/>
+            android:textSize="@dimen/button_text_size" />
     </LinearLayout>
 
     <TableRow
@@ -45,15 +45,14 @@
             android:onClick="buttonPress"
             />
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonDelete"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="Del"
-            android:textSize="@dimen/button_text_size"
             android:onClick="buttonPress"
+            android:src="@drawable/ic_backspace_black_24dp"
             />
 
         <Button
