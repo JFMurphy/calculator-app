@@ -22,6 +22,7 @@ public class CalculatorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calculator);
     }
 
+    // TODO Implement onClickListener. Get rid of onClick attribute in layout file.
     public void buttonPress(View view) {
         TypeCheck tc = new TypeCheck();
         EditText display = (EditText) findViewById(R.id.outputDisplay);
@@ -44,20 +45,16 @@ public class CalculatorActivity extends AppCompatActivity {
                     String currentDisplayContents = display.getText().toString();
                     String newDisplayContents = "";
 
+                    // Display is not empty
                     if (display.length() != 0) {
+                        int cursorPosition = display.getSelectionStart();
                         //If multiple characters are selected.
                         if (display.getSelectionEnd() > display.getSelectionStart() ) {
-                            newDisplayContents = currentDisplayContents.substring(0, display.getSelectionStart());
-                            newDisplayContents += currentDisplayContents.substring(display.getSelectionEnd());
-
-                            display.setText(newDisplayContents);
-                        } else {
-                            // There is no selection but there is a cursor.
-                            int cursorPosition = display.getSelectionStart();
-                            newDisplayContents = currentDisplayContents.substring(0, cursorPosition)
-                                    + currentDisplayContents.substring(cursorPosition);
-
-                            display.setText(newDisplayContents);
+                            display.getText().replace(cursorPosition, display.getSelectionEnd(), "");
+                            display.setSelection(cursorPosition);
+                        } // There is no selection only a cursor
+                        else {
+                            display.getText().delete(cursorPosition-1, cursorPosition);
                         }
                     }
                     break;
@@ -120,7 +117,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
             /* Actions for clearing the display and deleting characters */
                 case R.id.buttonClear:
-                    display.setText("");
+                    display.getText().clear();
                     currentNumber = "";
                     bracketOpen = false;
                     break;
