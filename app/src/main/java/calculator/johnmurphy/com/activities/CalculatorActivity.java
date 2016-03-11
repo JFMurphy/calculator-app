@@ -37,14 +37,8 @@ public class CalculatorActivity extends AppCompatActivity {
             imgButton = (ImageButton) view;
 
             switch (imgButton.getId()) {
+                // TODO Sync deletions made here with currentNumber variable.
                 case R.id.buttonDelete:
-                    /**
-                     * TODO
-                     * Implement functionality to delete characters from the current position of the cursor.
-                     */
-                    String currentDisplayContents = display.getText().toString();
-                    String newDisplayContents = "";
-
                     // Display is not empty
                     if (display.length() != 0) {
                         int cursorPosition = display.getSelectionStart();
@@ -54,6 +48,7 @@ public class CalculatorActivity extends AppCompatActivity {
                             display.setSelection(cursorPosition);
                         } // There is no selection only a cursor
                         else {
+                            // TODO: 11/03/2016 Keep deleting when button is held down.
                             display.getText().delete(cursorPosition-1, cursorPosition);
                         }
                     }
@@ -78,11 +73,14 @@ public class CalculatorActivity extends AppCompatActivity {
                 case R.id.buttonEight:
                 case R.id.buttonNine:
                 case R.id.buttonZero:
+                    // Insert digit at current cursor position.
+                    display.getText().insert(display.getSelectionStart(), buttonText);
+                    // TODO: 11/03/2016 currentNumber variable is now obsolete using this method of insertion. Rethink this.
                     currentNumber += buttonText;
-                    display.append(buttonText);
                     break;
 
             /* Checks for a decimal point and adds one if there isn't one in the current number. */
+                // TODO: 11/03/2016 Will need to be changed following new insertion method.
                 case R.id.buttonPoint:
                     if (currentNumber.contains(".")) {
                         System.out.println("Decimal point already exists.");
