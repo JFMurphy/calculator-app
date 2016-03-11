@@ -125,12 +125,6 @@ public class CalculatorActivity extends AppCompatActivity {
                     // TODO make it calculate.
             }
         }
-        //Button button = (Button) view;
-
-        //String buttonText = button.getText().toString();
-
-
-
     }
 
     private Boolean canAddOperator(EditText display, TypeCheck typeCheck) {
