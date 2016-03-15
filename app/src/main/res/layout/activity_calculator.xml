@@ -40,9 +40,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="2"
-            android:text="AC"
+            android:text="@string/btnClear"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
 
         <ImageButton
@@ -51,7 +50,6 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:onClick="buttonPress"
             android:src="@drawable/ic_backspace_black_24dp"
             />
 
@@ -61,9 +59,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="÷"
+            android:text="@string/btnDivide"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
     </TableRow>
 
@@ -79,9 +76,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="7"
+            android:text="@string/btn7"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
 
         <Button
@@ -90,9 +86,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="8"
+            android:text="@string/btn8"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
 
         <Button
@@ -101,9 +96,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="9"
+            android:text="@string/btn9"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
 
         <Button
@@ -112,9 +106,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="×"
+            android:text="@string/btnMultiply"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
     </TableRow>
 
@@ -129,9 +122,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="4"
+            android:text="@string/btn4"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
 
         <Button
@@ -140,9 +132,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="5"
+            android:text="@string/btn5"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
 
         <Button
@@ -151,9 +142,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="6"
+            android:text="@string/btn6"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
 
         <Button
@@ -162,9 +152,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="-"
+            android:text="@string/btnSubtract"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
     </TableRow>
 
@@ -179,9 +168,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="1"
+            android:text="@string/btn1"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
 
         <Button
@@ -190,9 +178,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="2"
+            android:text="@string/btn2"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
 
         <Button
@@ -201,9 +188,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="3"
+            android:text="@string/btn3"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
 
         <Button
@@ -212,9 +198,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="+"
+            android:text="@string/btnAdd"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
     </TableRow>
 
@@ -229,9 +214,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="( )"
+            android:text="@string/btnBrackets"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
 
         <Button
@@ -240,9 +224,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="0"
+            android:text="@string/btn0"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
 
         <Button
@@ -251,9 +234,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="."
+            android:text="@string/btnPoint"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
 
         <Button
@@ -262,9 +244,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/button_margin"
             android:layout_weight="1"
-            android:text="="
+            android:text="@string/btnEquals"
             android:textSize="@dimen/button_text_size"
-            android:onClick="buttonPress"
             />
     </TableRow>
 </TableLayout>

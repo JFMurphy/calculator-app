@@ -1,7 +1,7 @@
 package calculator.johnmurphy.com.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,15 +11,66 @@ import calculator.johnmurphy.com.calculator.R;
 import calculator.johnmurphy.com.implementation.Calculator;
 import calculator.johnmurphy.com.implementation.TypeCheck;
 
-public class CalculatorActivity extends AppCompatActivity {
+public class CalculatorActivity extends Activity implements View.OnClickListener{
 
     private boolean bracketOpen = false;
     private String currentNumber = "";
+
+    Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnPoint, btnBrackets,
+            btnAdd, btnSubtract, btnMultiply, btnDivide, btnEquals, btnClear;
+    ImageButton btnDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
+
+        // Instantiating buttons and adding onClickListeners
+        btn0  = (Button) findViewById(R.id.buttonZero);
+        btn0.setOnClickListener(this);
+        btn1 = (Button) findViewById(R.id.buttonOne);
+        btn1.setOnClickListener(this);
+        btn2 = (Button) findViewById(R.id.buttonTwo);
+        btn2.setOnClickListener(this);
+        btn3 = (Button) findViewById(R.id.buttonThree);
+        btn3.setOnClickListener(this);
+        btn4 = (Button) findViewById(R.id.buttonFour);
+        btn4.setOnClickListener(this);
+        btn5 = (Button) findViewById(R.id.buttonFive);
+        btn5.setOnClickListener(this);
+        btn6 = (Button) findViewById(R.id.buttonSix);
+        btn6.setOnClickListener(this);
+        btn7 = (Button) findViewById(R.id.buttonSeven);
+        btn7.setOnClickListener(this);
+        btn8 = (Button) findViewById(R.id.buttonEight);
+        btn8.setOnClickListener(this);
+        btn9 = (Button) findViewById(R.id.buttonNine);
+        btn9.setOnClickListener(this);
+        btnPoint = (Button) findViewById(R.id.buttonPoint);
+        btnPoint.setOnClickListener(this);
+        btnBrackets = (Button) findViewById(R.id.buttonBrackets);
+        btnBrackets.setOnClickListener(this);
+        btnAdd = (Button) findViewById(R.id.buttonAdd);
+        btnAdd.setOnClickListener(this);
+        btnSubtract = (Button) findViewById(R.id.buttonSubtract);
+        btnSubtract.setOnClickListener(this);
+        btnMultiply = (Button) findViewById(R.id.buttonMultiply);
+        btnMultiply.setOnClickListener(this);
+        btnDivide = (Button) findViewById(R.id.buttonDivide);
+        btnDivide.setOnClickListener(this);
+        btnEquals = (Button) findViewById(R.id.buttonEquals);
+        btnEquals.setOnClickListener(this);
+        btnClear = (Button) findViewById(R.id.buttonClear);
+        btnClear.setOnClickListener(this);
+        btnDelete = (ImageButton) findViewById(R.id.buttonDelete);
+        btnDelete.setOnClickListener(this);
+
+    }
+
+    // TODO Implement onClick method
+    @Override
+    public void onClick(View v) {
+
     }
 
     // TODO Implement onClickListener. Get rid of onClick attribute in layout file.
