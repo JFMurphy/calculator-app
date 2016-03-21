@@ -2,7 +2,6 @@ package calculator.johnmurphy.com.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +14,6 @@ import calculator.johnmurphy.com.implementation.Calculator;
 import calculator.johnmurphy.com.implementation.TypeCheck;
 
 
-// TODO
 public class CalculatorActivity extends Activity implements View.OnClickListener {
 
     private boolean bracketOpen = false;
@@ -101,7 +99,9 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         EditText display = (EditText) findViewById(R.id.outputDisplay);
+        int cursorPosition = display.getSelectionStart();
         TypeCheck tc = new TypeCheck();
+        String buttonText;
 
         switch (v.getId()) {
             /* Adds numbers to the display */
@@ -115,17 +115,17 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
             case R.id.buttonSeven:
             case R.id.buttonEight:
             case R.id.buttonNine:
-                String buttonText = ((Button) v).getText().toString();
+                buttonText = ((Button) v).getText().toString();
                 // Insert digit at current cursor position.
-                display.getText().insert(display.getSelectionStart(), buttonText);
+                display.getText().insert(cursorPosition, buttonText);
                 // TODO: 11/03/2016 currentNumber variable is now obsolete using this method of insertion. Rethink this.
                 currentNumber += buttonText;
                 break;
 
             /* Adds decimal point */
             case R.id.buttonPoint:
-                // TODO Add decimal point to number only
-                display.getText().insert(display.getSelectionStart(), ((Button) v).getText());
+                buttonText = ((Button) v).getText().toString();
+                display.getText().insert(cursorPosition, buttonText);
                 break;
 
             /* Adds brackets to current equation. */
@@ -145,7 +145,12 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
             case R.id.buttonSubtract:
             case R.id.buttonMultiply:
             case R.id.buttonDivide:
-                if (canAddOperator(display, tc)) {
+                buttonText = ((Button) v).getText().toString();
+                // If adding an operator at the end of the equation or beside another operator
+
+                display.getText().insert(cursorPosition, buttonText);
+
+                if (canAddOperator(display, tc, cursorPosition)) {
                     display.append(((Button) v).getText());
                     currentNumber = "";
                 }
@@ -155,7 +160,6 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
             case R.id.buttonDelete:
                 // If display is not empty
                 if (display.length() != 0) {
-                    int cursorPosition = display.getSelectionStart();
                     //If multiple characters are selected.
                     if (display.getSelectionEnd() > display.getSelectionStart()) {
                         display.getText().replace(cursorPosition, display.getSelectionEnd(), "");
@@ -184,14 +188,21 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
 
     }
 
-    private Boolean canAddOperator(EditText display, TypeCheck typeCheck) {
-        // Checking the end of the display for an existing operator and return true if found.
-        if (typeCheck.isOperator(display.getText().charAt(display.length() - 1))) {
+    /* Checks for existing adjacent operators and returns true is found. */
+    private Boolean canAddOperator(EditText display, TypeCheck typeCheck, int cursorPos) {
+        String displayText = display.getText().toString();
+        // Checking for an operator at or before the cursor.
+        if (typeCheck.isOperator(displayText.charAt(cursorPos - 1)) || typeCheck.isOperator(displayText.charAt(cursorPos))) {
             System.out.println("There is already an operator here!");
             return false;
         } else {
             return true;
         }
+    }
+
+    private Boolean canAddPoint(EditText display, TypeCheck typeCheck) {
+
+        return true;
     }
 
     /**
