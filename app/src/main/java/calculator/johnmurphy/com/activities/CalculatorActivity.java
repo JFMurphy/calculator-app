@@ -2,19 +2,26 @@ package calculator.johnmurphy.com.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
+
 import calculator.johnmurphy.com.calculator.R;
 import calculator.johnmurphy.com.implementation.Calculator;
 import calculator.johnmurphy.com.implementation.TypeCheck;
 
-public class CalculatorActivity extends Activity implements View.OnClickListener{
+
+// TODO
+public class CalculatorActivity extends Activity implements View.OnClickListener {
 
     private boolean bracketOpen = false;
+    private boolean buttonIsPressed = false;
     private String currentNumber = "";
+    private ArrayList<String> calculationArray = new ArrayList<>();
 
     Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnPoint, btnBrackets,
             btnAdd, btnSubtract, btnMultiply, btnDivide, btnEquals, btnClear;
@@ -26,7 +33,7 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
         setContentView(R.layout.activity_calculator);
 
         // Instantiating buttons and adding onClickListeners
-        btn0  = (Button) findViewById(R.id.buttonZero);
+        btn0 = (Button) findViewById(R.id.buttonZero);
         btn0.setOnClickListener(this);
         btn1 = (Button) findViewById(R.id.buttonOne);
         btn1.setOnClickListener(this);
@@ -64,123 +71,122 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
         btnClear.setOnClickListener(this);
         btnDelete = (ImageButton) findViewById(R.id.buttonDelete);
         btnDelete.setOnClickListener(this);
+        /*btnDelete.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_UP:
+                        System.out.println("Button is released!");
+                        btnDelete.setPressed(false);
+                        break;
 
+                    case MotionEvent.ACTION_DOWN:
+                        System.out.println("Button is pressed!");
+                        EditText display = (EditText) findViewById(R.id.outputDisplay);
+                        System.out.println(display.getText());
+                        System.out.println(display.getSelectionStart());
+                        btnDelete.setPressed(true);
+
+                        while (btnDelete.isPressed() && display.getText().length() > 0) {
+                            display.getText().delete(display.getSelectionStart()-1, display.getSelectionStart());
+
+                        }
+                        break;
+                }
+                return true;
+            }
+        });*/
     }
 
-    // TODO Implement onClick method
     @Override
     public void onClick(View v) {
-
-    }
-
-    // TODO Implement onClickListener. Get rid of onClick attribute in layout file.
-    public void buttonPress(View view) {
-        TypeCheck tc = new TypeCheck();
         EditText display = (EditText) findViewById(R.id.outputDisplay);
-        Button button;
-        ImageButton imgButton;
-        String buttonText;
+        TypeCheck tc = new TypeCheck();
 
-        /* Check if this view is an ImageButton and cast it.
-           If not cast as Button.
-         */
-        if (view instanceof ImageButton) {
-            imgButton = (ImageButton) view;
+        switch (v.getId()) {
+            /* Adds numbers to the display */
+            case R.id.buttonZero:
+            case R.id.buttonOne:
+            case R.id.buttonTwo:
+            case R.id.buttonThree:
+            case R.id.buttonFour:
+            case R.id.buttonFive:
+            case R.id.buttonSix:
+            case R.id.buttonSeven:
+            case R.id.buttonEight:
+            case R.id.buttonNine:
+                String buttonText = ((Button) v).getText().toString();
+                // Insert digit at current cursor position.
+                display.getText().insert(display.getSelectionStart(), buttonText);
+                // TODO: 11/03/2016 currentNumber variable is now obsolete using this method of insertion. Rethink this.
+                currentNumber += buttonText;
+                break;
 
-            switch (imgButton.getId()) {
-                // TODO Sync deletions made here with currentNumber variable.
-                case R.id.buttonDelete:
-                    // Display is not empty
-                    if (display.length() != 0) {
-                        int cursorPosition = display.getSelectionStart();
-                        //If multiple characters are selected.
-                        if (display.getSelectionEnd() > display.getSelectionStart() ) {
-                            display.getText().replace(cursorPosition, display.getSelectionEnd(), "");
-                            display.setSelection(cursorPosition);
-                        } // There is no selection only a cursor
-                        else {
-                            // TODO: 11/03/2016 Keep deleting when button is held down.
-                            display.getText().delete(cursorPosition-1, cursorPosition);
-                        }
-                    }
-                    break;
-            }
-        }
-        else {
-            button = (Button) view;
-            buttonText = button.getText().toString();
+            /* Adds decimal point */
+            case R.id.buttonPoint:
+                // TODO Add decimal point to number only
+                display.getText().insert(display.getSelectionStart(), ((Button) v).getText());
+                break;
 
-            switch(button.getId()) {
-
-            /* Adds numbers to the calculation. */
-                // TODO Improve number adding method so numbers can be added at any position.
-                case R.id.buttonOne:
-                case R.id.buttonTwo:
-                case R.id.buttonThree:
-                case R.id.buttonFour:
-                case R.id.buttonFive:
-                case R.id.buttonSix:
-                case R.id.buttonSeven:
-                case R.id.buttonEight:
-                case R.id.buttonNine:
-                case R.id.buttonZero:
-                    // Insert digit at current cursor position.
-                    display.getText().insert(display.getSelectionStart(), buttonText);
-                    // TODO: 11/03/2016 currentNumber variable is now obsolete using this method of insertion. Rethink this.
-                    currentNumber += buttonText;
-                    break;
-
-            /* Checks for a decimal point and adds one if there isn't one in the current number. */
-                // TODO: 11/03/2016 Will need to be changed following new insertion method.
-                case R.id.buttonPoint:
-                    if (currentNumber.contains(".")) {
-                        System.out.println("Decimal point already exists.");
-                    } else {
-                        display.append(buttonText);
-                        currentNumber += buttonText;
-                    }
-                    break;
-
-            /* Performs the actions for adding brackets to the calculation. */
-                case R.id.buttonBrackets:
-                    // TODO improve bracket adding functionality
-                    if (!bracketOpen) {
-                        bracketOpen = true;
-                        display.append("(");
-                    } else {
-                        display.append(")");
-                        bracketOpen = false;
-                    }
-                    break;
-
-            /* Adding mathematical operators */
-                case R.id.buttonMultiply:
-                case R.id.buttonDivide:
-                case R.id.buttonAdd:
-                case R.id.buttonSubtract:
-                    if (canAddOperator(display, tc)) {
-                        display.append(buttonText);
-                        currentNumber = "";
-                    }
-                    break;
-
-            /* Actions for clearing the display and deleting characters */
-                case R.id.buttonClear:
-                    display.getText().clear();
-                    currentNumber = "";
+            /* Adds brackets to current equation. */
+            case R.id.buttonBrackets:
+                // TODO improve bracket adding functionality
+                if (!bracketOpen) {
+                    bracketOpen = true;
+                    display.append("(");
+                } else {
+                    display.append(")");
                     bracketOpen = false;
-                    break;
+                }
+                break;
 
-            /* Calculating the equation. */
-                case R.id.buttonEquals:
-                    // TODO make it calculate.
-            }
+            /* Adds mathematical operators */
+            case R.id.buttonAdd:
+            case R.id.buttonSubtract:
+            case R.id.buttonMultiply:
+            case R.id.buttonDivide:
+                if (canAddOperator(display, tc)) {
+                    display.append(((Button) v).getText());
+                    currentNumber = "";
+                }
+                break;
+
+            /* Deletes the character at the current cursor position */
+            case R.id.buttonDelete:
+                // If display is not empty
+                if (display.length() != 0) {
+                    int cursorPosition = display.getSelectionStart();
+                    //If multiple characters are selected.
+                    if (display.getSelectionEnd() > display.getSelectionStart()) {
+                        display.getText().replace(cursorPosition, display.getSelectionEnd(), "");
+                        display.setSelection(cursorPosition);
+                    } // There is no selection only a cursor
+                    else {
+                        // TODO: 11/03/2016 Keep deleting when button is held down.
+                        display.getText().delete(cursorPosition-1, cursorPosition);
+                    }
+                }
+                break;
+
+            /* Clears the equation from the display */
+            case R.id.buttonClear:
+                display.getText().clear();
+                currentNumber = "";
+                bracketOpen = false;
+                break;
+
+            /* Calculates the equation */
+            case R.id.buttonEquals:
+                // TODO Calculate equation
+                break;
         }
+
+
     }
 
     private Boolean canAddOperator(EditText display, TypeCheck typeCheck) {
         // Checking the end of the display for an existing operator and return true if found.
-        if (typeCheck.isOperator(display.getText().charAt(display.length()-1))) {
+        if (typeCheck.isOperator(display.getText().charAt(display.length() - 1))) {
             System.out.println("There is already an operator here!");
             return false;
         } else {
@@ -188,32 +194,9 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
         }
     }
 
-    public void addBrackets(View view) {
-        EditText display = (EditText) findViewById(R.id.outputDisplay);
-
-        if (!bracketOpen) {
-            bracketOpen = true;
-            display.append("(");
-        } else {
-            bracketOpen = false;
-            display.append(")");
-        }
-    }
-
-    public void deleteElement(View view) {
-        String temp;
-        int displayTextLen;
-        EditText display = (EditText) findViewById(R.id.outputDisplay);
-        displayTextLen = display.getText().length();
-
-        if (displayTextLen > 0) {
-            temp = display.getText().toString();
-            display.setText(temp.substring(0, displayTextLen - 1));
-        }
-    }
-
     /**
      * Calculates the equation currently in the display.
+     *
      * @param view
      */
     public void sendEquation(View view) {
@@ -223,7 +206,7 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
         String displayText = display.getText().toString();
 
         // Checks if there are any trailing operators and excludes them.
-        if (tc.isOperator(displayText.charAt(displayText.length()-1))) {
+        if (tc.isOperator(displayText.charAt(displayText.length() - 1))) {
             display.setText(displayText.substring(0, displayText.length() - 1));
             displayText = display.getText().toString();
         }
