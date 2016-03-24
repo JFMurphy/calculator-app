@@ -191,6 +191,9 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
     /* Checks for existing adjacent operators and returns true is found. */
     private Boolean canAddOperator(EditText display, TypeCheck typeCheck, int cursorPos) {
         String displayText = display.getText().toString();
+        if (cursorPos == 0) {
+            return false;
+        }
         // Checking for an operator at or before the cursor.
         if (typeCheck.isOperator(displayText.charAt(cursorPos - 1)) || typeCheck.isOperator(displayText.charAt(cursorPos))) {
             System.out.println("There is already an operator here!");
@@ -200,9 +203,53 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
         }
     }
 
-    private Boolean canAddPoint(EditText display, TypeCheck typeCheck) {
+    private Boolean canAddPoint(EditText display, TypeCheck typeCheck, int cursorPos) {
+        String displayText = display.getText().toString();
+        String number;
+        int numberStart;
+        int numberEnd;
+        // If cursor is at the start of equation check adjacent space for a point.
+        if (cursorPos == 0 && displayText.charAt(cursorPos) != '.') {
+            return true;
+        }
 
-        return true;
+        // Setting up to find the start of the number.
+        char currentChar = displayText.charAt(cursorPos - 1);
+        int currentCharIndex = cursorPos - 1;
+
+        // Finding the start of the number
+        while (!typeCheck.isNonNumeric(currentChar)) {
+
+            // Check if the at the start of the display.
+            if (currentCharIndex - 1 <= 0) {
+                // Finding the start of the number
+                currentCharIndex--;
+                currentChar = displayText.charAt(currentCharIndex);
+            } else {
+                // Decrease index so that the numberStart can be accurately assigned later.
+                currentCharIndex--;
+            }
+        }
+
+        numberStart = currentCharIndex + 1;
+        // Setting up to find end of number.
+        currentChar = displayText.charAt(cursorPos);
+        currentCharIndex = cursorPos;
+
+        // Finding the end of the number
+        while (!typeCheck.isNonNumeric(displayText.charAt(currentChar))) {
+            currentCharIndex++;
+            currentChar = displayText.charAt(currentCharIndex);
+        }
+
+        numberEnd = currentCharIndex - 1;
+        number = displayText.substring(numberStart, numberEnd);
+
+        return (!number.contains("."));
+    }
+
+    private void addPoint(EditText display) {
+
     }
 
     /**
