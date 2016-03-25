@@ -220,8 +220,9 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
         // Finding the start of the number
         while (!typeCheck.isNonNumeric(currentChar)) {
 
-            // Check if the at the start of the display.
-            if (currentCharIndex - 1 <= 0) {
+            // If currentCharIndex - 1 is less than or equal to 0 then we are at the start of the
+            // equation.
+            if (currentCharIndex - 1 > 0) {
                 // Finding the start of the number
                 currentCharIndex--;
                 currentChar = displayText.charAt(currentCharIndex);
@@ -232,6 +233,7 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
         }
 
         numberStart = currentCharIndex + 1;
+
         // Setting up to find end of number.
         currentChar = displayText.charAt(cursorPos);
         currentCharIndex = cursorPos;
