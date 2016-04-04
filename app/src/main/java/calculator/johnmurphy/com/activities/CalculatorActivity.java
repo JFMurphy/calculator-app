@@ -125,7 +125,9 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
             /* Adds decimal point */
             case R.id.buttonPoint:
                 buttonText = ((Button) v).getText().toString();
-                display.getText().insert(cursorPosition, buttonText);
+                if (canAddPoint(display, tc, cursorPosition)) {
+                    display.getText().insert(cursorPosition, buttonText);
+                }
                 break;
 
             /* Adds brackets to current equation. */
@@ -239,12 +241,18 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
         currentCharIndex = cursorPos;
 
         // Finding the end of the number
-        while (!typeCheck.isNonNumeric(displayText.charAt(currentChar))) {
+        while (!typeCheck.isNonNumeric(currentChar)) {
             currentCharIndex++;
-            currentChar = displayText.charAt(currentCharIndex);
+
+            if (currentCharIndex <= displayText.length()-1) {
+                currentChar = displayText.charAt(currentCharIndex);
+            } else {
+                break;
+            }
+
         }
 
-        numberEnd = currentCharIndex - 1;
+        numberEnd = currentCharIndex;
         number = displayText.substring(numberStart, numberEnd);
 
         return (!number.contains("."));
