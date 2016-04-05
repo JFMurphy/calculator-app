@@ -188,20 +188,19 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
     /* Checks for existing adjacent operators and returns true if found. */
     private Boolean canAddOperator(EditText display, TypeCheck typeCheck, int cursorPos) {
         String displayText = display.getText().toString();
+
+        //Cursor is at the start of display. Can't have a leading operator.
         if (cursorPos == 0) {
             return false;
         }
+
         // If the cursor is at the end of the display it will be outside of the string index therefore
-        // it should be offset by one if it's at the end.
+        // it should be offset by one.
         if (cursorPos >= displayText.length()) {
-            cursorPos--;
-        }
-        // Checking for an operator at or before the cursor.
-        if (typeCheck.isOperator(displayText.charAt(cursorPos - 1)) || typeCheck.isOperator(displayText.charAt(cursorPos))) {
-            System.out.println("There is already an operator here!");
-            return false;
-        } else {
-            return true;
+            return !typeCheck.isOperator(displayText.charAt(cursorPos - 1));
+        } // Checking for an operator at or before the cursor.
+        else {
+            return !((typeCheck.isOperator(displayText.charAt(cursorPos - 1))) || (typeCheck.isOperator(displayText.charAt(cursorPos))));
         }
     }
 
