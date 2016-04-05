@@ -148,17 +148,13 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
             case R.id.buttonMultiply:
             case R.id.buttonDivide:
                 buttonText = ((Button) v).getText().toString();
-                // If adding an operator at the end of the equation or beside another operator
-
-                display.getText().insert(cursorPosition, buttonText);
-
+                // Check if an operator can be added
                 if (canAddOperator(display, tc, cursorPosition)) {
-                    display.append(((Button) v).getText());
-                    currentNumber = "";
+                    display.getText().insert(cursorPosition, buttonText);
                 }
                 break;
 
-            /* Deletes the character at the current cursor position */
+            /* Deletes the character at the current cursor position or a selection of characters. */
             case R.id.buttonDelete:
                 // If display is not empty
                 if (display.length() != 0) {
@@ -187,14 +183,18 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
                 break;
         }
 
-
     }
 
-    /* Checks for existing adjacent operators and returns true is found. */
+    /* Checks for existing adjacent operators and returns true if found. */
     private Boolean canAddOperator(EditText display, TypeCheck typeCheck, int cursorPos) {
         String displayText = display.getText().toString();
         if (cursorPos == 0) {
             return false;
+        }
+        // If the cursor is at the end of the display it will be outside of the string index therefore
+        // it should be offset by one if it's at the end.
+        if (cursorPos >= displayText.length()) {
+            cursorPos--;
         }
         // Checking for an operator at or before the cursor.
         if (typeCheck.isOperator(displayText.charAt(cursorPos - 1)) || typeCheck.isOperator(displayText.charAt(cursorPos))) {
@@ -231,13 +231,20 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
             } else {
                 // Decrease index so that the numberStart can be accurately assigned later.
                 currentCharIndex--;
+                break;
             }
         }
 
         numberStart = currentCharIndex + 1;
 
-        // Setting up to find end of number.
-        currentChar = displayText.charAt(cursorPos);
+        /* Setting up to find end of number. */
+        // If cursor is at the end an IndexOutOfBounds exception will be thrown so we need to offset
+        // the cursorPos to get the last character.
+        if (cursorPos == displayText.length()) {
+            currentChar = displayText.charAt(cursorPos - 1);
+        } else {
+            currentChar = displayText.charAt(cursorPos);
+        }
         currentCharIndex = cursorPos;
 
         // Finding the end of the number
