@@ -123,6 +123,8 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
             /* Adds decimal point */
             case R.id.buttonPoint:
                 // TODO Adding a point with nothing else in the display causes a crash.
+                // TODO Adding a point at the end of an equation causes a crash.
+                // TODO A point can be added to the first number in an equation if it already has a point.
                 buttonText = ((Button) v).getText().toString();
                 if (canAddPoint(display, tc, cursorPosition)) {
                     display.getText().insert(cursorPosition, buttonText);
@@ -208,6 +210,9 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
         String number;
         int numberStart;
         int numberEnd;
+        // Checking for empty display.
+        if (displayText.isEmpty())
+            return true;
         // If cursor is at the start of equation check adjacent space for a point.
         if (cursorPos == 0 && displayText.charAt(cursorPos) != '.') {
             return true;
