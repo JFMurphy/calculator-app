@@ -118,12 +118,11 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
                 buttonText = ((Button) v).getText().toString();
                 // Insert digit at current cursor position.
                 display.getText().insert(cursorPosition, buttonText);
-                // TODO: 11/03/2016 currentNumber variable is now obsolete using this method of insertion. Rethink this.
-                currentNumber += buttonText;
                 break;
 
             /* Adds decimal point */
             case R.id.buttonPoint:
+                // TODO Adding a point with nothing else in the display causes a crash.
                 buttonText = ((Button) v).getText().toString();
                 if (canAddPoint(display, tc, cursorPosition)) {
                     display.getText().insert(cursorPosition, buttonText);
