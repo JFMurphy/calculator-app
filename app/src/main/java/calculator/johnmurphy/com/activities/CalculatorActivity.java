@@ -210,6 +210,7 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
         String number;
         int numberStart;
         int numberEnd;
+
         // Checking for empty display.
         if (displayText.isEmpty())
             return true;
@@ -219,25 +220,26 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
         }
 
         // Setting up to find the start of the number.
-        char currentChar = displayText.charAt(cursorPos - 1);
-        int currentCharIndex = cursorPos - 1;
+        int currentCharIndex = cursorPos -1;
+        char currentChar = displayText.charAt(currentCharIndex);
 
-        // Finding the start of the number
+        /* Finding the start of the number */
+        // While currentChar is a number.
         while (!typeCheck.isNonNumeric(currentChar)) {
+            currentCharIndex--;
 
-            // If currentCharIndex - 1 is less than or equal to 0 then we are at the start of the
-            // equation.
-            if (currentCharIndex - 1 > 0) {
-                // Finding the start of the number
-                currentCharIndex--;
+            // Ensures no Out of bounds exceptions will occur by limiting the assignment
+            // of currentChar to characters within a valid range.
+            if (currentCharIndex >= 0)
                 currentChar = displayText.charAt(currentCharIndex);
-            } else {
-                // Decrease index so that the numberStart can be accurately assigned later.
-                currentCharIndex--;
-                break;
-            }
         }
 
+        // Adding 1 to the currentCharIndex will do one of two things:
+        // 1. If an operator was assigned to currentChar then we need to offset
+        // the currentCharIndex in order to get the start of the number.
+        // 2. If we never encountered an operator and instead reached the start of the
+        // equation then the currentCharIndex will be -1 and using this value to find a char
+        // will result in an IndexOutOfBounds exception.
         numberStart = currentCharIndex + 1;
 
         /* Setting up to find end of number. */
@@ -266,10 +268,6 @@ public class CalculatorActivity extends Activity implements View.OnClickListener
         number = displayText.substring(numberStart, numberEnd);
 
         return (!number.contains("."));
-    }
-
-    private void addPoint(EditText display) {
-
     }
 
     /**
